@@ -31,6 +31,6 @@ for totake, prereq in prereqs:
     adj[prereq].append(totake)
 
 for i in range(numVertexes):
-    if dfs(i):
+    if i not in visited and dfs(i):
         print("TRUE") # There is a cycle
         
