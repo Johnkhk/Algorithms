@@ -1,8 +1,6 @@
-from collections import defaultdict
-
-
-# Time: O(V+E)
-# Space: O(V)
+numCourses = 4
+# prerequisites = [[1,0],[2,0],[3,1],[3,2],[0,1]] #Cycle
+prerequisites = [[1,0],[2,0],[3,1],[3,2]] #No Cycle
 
 def dfs(node):
     visited.add(node)
@@ -14,19 +12,19 @@ def dfs(node):
             if dfs(child):
                 return True
     dfsvisited.remove(node)
+    stack.append(node)
     return False
-
 visited = set()
 dfsvisited = set()
-prereqs = [[1,0],[2,0],[3,1],[3,2],[0,1]]
-# prereqs = [[1,0],[2,0],[3,1],[3,2]]
+stack=[]
 
-numVertexes = 4
-adj={i:[] for i in range(numVertexes)}
-for totake, prereq in prereqs:
+
+adj={i:[] for i in range(numCourses)}
+for totake, prereq in prerequisites:
     adj[prereq].append(totake)
-
-for i in range(numVertexes):
+for i in range(numCourses):
     if i not in visited and dfs(i):
-        print("TRUE") # There is a cycle
-        
+        print([])
+        #  return []
+print(stack)
+# return anstacks
