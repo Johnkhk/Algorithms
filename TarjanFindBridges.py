@@ -1,7 +1,7 @@
 from collections import defaultdict
 
 n=4
-connections=[[0,1],[2,3]]
+connections=[[0,1],[1,2],[2,0],[1,3]]
 
  # Tarjan's algorithm for finding bridges
 disc=[-1]*n
@@ -21,11 +21,12 @@ def dfs(node,parent):
             dfs(child,node)
             low[node]=min(low[node],low[child]) # postorder changes
             
-            if low[child] > disc[node]:
+            if low[child] > disc[node]: # Bridge connection (cross edge)
                 bridges.append([child,node])
         elif parent !=child:
             low[node] = min(low[node],disc[child])
-disc[0]=0
-low[0]=0
+
+print(adj)
 dfs(0,None)
+print(disc,low)
 print(bridges)

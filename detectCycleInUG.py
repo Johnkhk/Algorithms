@@ -31,7 +31,7 @@ for n1,n2 in edges:
         # return [n1,n2]
 
 ### Method 2 DFS ###
-# Logic is: if we DFS and we hit a node which is in visited, but not our own parent, then we have a cycle!
+# Logic is: if we DFS and we hit a node which is in visited, but not our own parent, then we have a cycle! (i.e. backedge)
 
 
 print("#"*30)
