@@ -1,3 +1,16 @@
+"""
+Summary:
+To come up with this solution myself.
+Think of the max area a paticular height will have.
+if a height is in a rectangle, no smaller heights are in that rectabgle, only bigger ones can have smaller rectangle cutoff below them. 
+Then the issue is to find the left and right boundary where the bars are shorter than x
+According to the code, when a bar is popped out from the stack, we know it must be higher than the bar at position i, 
+so bar[i] must be the right boundary (exclusive) of the rectangle, and the previous bar in the stack is the first one that is shorter than the popped one so it must be the left boundary (also exclusive). Then we find the rectangle.
+SO ABOUT TO ENTER IS RIGHT BOUNDARY
+POPPED IS THE HEIGHT
+LEFT IS THE LEFT BOUNDARY
+"""
+
 
 """
 because we are going left to right,
@@ -30,3 +43,35 @@ for i, height in enumerate(chain([0], heights, [0])): # append zero heights at b
 print(maxArea)
 
 
+### EVEN MORE ELEGANT SOLUTION ###
+height = [5,4,3,2,1]
+
+height.append(0)
+stack = [-1]
+ans = 0
+for i in range(len(height)):
+    while height[i] < height[stack[-1]]:
+        h = height[stack.pop()]
+        w = i - stack[-1] - 1
+        ans = max(ans, h * w)
+    stack.append(i)
+height.pop()
+print(ans)
+
+### Most intuituve Solution (Neetcode) ###
+maxArea = 0
+stack=[]
+
+for i,h in enumerate(heights):
+    startidx=i
+    while stack and stack[-1][1] > h:
+        idx,hpop = stack.pop()
+        maxArea = max(maxArea, (i-idx)*hpop)
+        startidx=idx # push back the start index
+    stack.append([startidx,h])
+
+while stack:
+    idx,hpop = stack.pop()
+    maxArea = max(maxArea, (len(heights)-idx)*hpop)
+    
+return  maxArea
