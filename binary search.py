@@ -41,8 +41,6 @@ def findPivot(nums):
     l,r = 0, len(nums)-1
     while l<r:
         mid = (l+r)//2
-        print(nums[mid])
-        # if nums[r]<nums[mid]:
         if nums[l]<=nums[mid]:
             if nums[l]<nums[r]:
                 break
@@ -58,11 +56,60 @@ def findPivot(nums):
     l,r = 0, len(nums)-1
     while l<r:
         mid = (l+r)//2
-        # if nums[l]<nums[mid] and nums[r<nums[mid]:
         if nums[r]<nums[mid]:
             l=mid+1 # case1
-        # elif nums[l]>nums[mid] and nums[r]>nums[mid]: # case2
         elif nums[r]>=nums[mid]: # case2
             r=mid
     pivot=l
     return pivot
+
+### peak in mountain ###
+def findPeak(arr):
+    lo = 0
+    hi = len(arr)-1
+
+    while(lo<hi):
+        # mid = lo + (hi-lo +1)/2
+        mid = (lo + hi)/2
+        if(arr[mid]<arr[mid+1]):
+            lo=mid+1
+        else:
+            hi=mid
+    return lo
+
+### get first smaller or equal elem ###
+def getLeq(nums,target):
+    l,r = 0, len(nums)-1
+    while l<=r:
+        mid = (l+r)//2
+        if nums[mid]<=target: # if nums[mid]<target: (FIRST ELEM STRICTLY SMALLER)
+            l=mid+1
+        else:
+            r=mid-1
+    # not found
+    if r==-1:
+        return -1
+    return nums[r]
+# nums=[1,3,5,11]
+# print(getLeq(nums,1.1))
+
+def getGeq(nums,target):
+    l,r = 0, len(nums)-1
+    while l<=r:
+        mid = (l+r)//2
+        # GEQ
+        if nums[mid]<target: # if nums[mid]<=target: (FIRST ELEM STRICTLY GREATER)
+            l=mid+1
+        else:
+            r=mid-1
+    # not found
+    if l==len(nums):
+        return -1
+    return nums[l]
+nums=[1,3,5,11]
+print(getGeq(nums,5))
+# TODO:
+"""
+https://leetcode.com/problems/find-in-mountain-array/
+https://leetcode.com/problems/longest-mountain-in-array/
+"""
