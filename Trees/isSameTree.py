@@ -1,4 +1,16 @@
 from collections import deque
+### Most Clean ###
+def isSame(node,subroot):
+    if not node and not subroot:
+        return True
+    if not node or not subroot:
+        return False
+    if node.val!=subroot.val:
+        return False
+    l = isSame(node.left,subroot.left)
+    r = isSame(node.right,subroot.right)
+    return l and r
+
 ### Recursive ###
 def isSameTree(p,q):
     """
