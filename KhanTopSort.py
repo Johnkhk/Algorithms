@@ -29,3 +29,132 @@ if len(ans)!=numCourses:
     # return []
 print(ans)
 # return ans
+
+
+### Alien Dictionary Khan's Algorithm ###
+def alienOrder(words):
+        
+    """
+    goal: 
+        return a string of the unique letters in sorted order
+        if no solution return ""
+    idea: 
+        build a adjacenct listof words that differ (the order)
+        top sort the adj list with khan's algorithm
+        first word -> second word
+        indegree[second word]+=1
+    Complexity:
+        Let N be the total number of strings in the input list.
+        Let C be the total length of all the words in the input list, added together.
+        Let U be the total number of unique letters in the alien alphabet. 
+        TC: O(C)
+            building the adj list and identifying all relations could take up all C. 
+            For the BFS, it is O(V+E) where V=U (U vertices cuz unique chars are in indegree), and N-1 edges since we only compare 1:1
+            So, BFS is O(U+N)
+        SC: O(V+E) = O(U+min(U^2N))
+            For fixed alphabet: 26 letters
+            U is 26 so technically O(1)
+    """
+    # indegree = {i:0 for i in mp.keys()}
+    # indegree = defaultdict(int)
+    indegree = Counter({c : 0 for word in words for c in word})
+    mp = defaultdict(set)
+    for i in range(len(words)-1):
+        minlen = min(len(words[i]),len(words[i+1]))
+
+        if len(words[i]) > len(words[i+1]) and words[i][:minlen]==words[i+1][:minlen]:
+            return ""
+        
+        for j in range(minlen):
+            if words[i][j]!=words[i+1][j]:
+                if words[i+1][j] not in mp[words[i][j]]:
+                    mp[words[i][j]].add(words[i+1][j])
+                    indegree[words[i+1][j]]+=1
+                break
+    x=0
+    q=deque()
+    for k,v in indegree.items():
+        # if k in mp or k in mp[k]:
+        if v==0:
+            q.append(k)
+        # if v==0:
+        #     q.append(k)
+    ans=[]
+    while q:
+        node = q.popleft()
+        x+=1
+        ans.append(node)
+        for child in mp[node]:
+            indegree[child]-=1
+            if indegree[child]==0:
+                q.append(child)
+    if x!=len(indegree):
+        return ""
+    return "".join(ans)
+
+### Alien Dictionary DFS (WHITE,GREY,BLACK) (Reverse ADJ List) ###
+def alienOrder(words):
+    mp = {char: set() for word in words for char in word}
+    for i in range(len(words)-1):
+        minlen = min(len(words[i]),len(words[i+1]))
+        if len(words[i]) > len(words[i+1]) and words[i][:minlen]==words[i+1][:minlen]:
+            return ""
+        for j in range(minlen):
+            if words[i][j]!=words[i+1][j]:
+                mp[words[i+1][j]].add(words[i][j])
+                break
+    visited=defaultdict(bool) # True: black, False: grey       
+    res=[]
+    def dfs(node):
+        if node in visited:
+            return visited[node]
+        visited[node]=False
+        for child in mp[node]:
+            status = dfs(child)
+            if status==False:
+                return False
+        visited[node]=True
+        # post order we add
+        res.append(node)
+        return True
+    for key,val in mp.items():
+        if not dfs(key):
+            return ""
+    return "".join(res)
+
+### Alien Dictionary DFS (WHITE,GREY,BLACK) (Forward ADJ List, Reverse Result) ###
+def alienOrder(words):
+    mp = {char: set() for word in words for char in word}
+    for i in range(len(words)-1):
+        minlen = min(len(words[i]),len(words[i+1]))
+        if len(words[i]) > len(words[i+1]) and words[i][:minlen]==words[i+1][:minlen]:
+            return ""
+        for j in range(minlen):
+            if words[i][j]!=words[i+1][j]:
+                mp[words[i][j]].add(words[i+1][j])
+                break
+    
+    
+    visited=defaultdict(bool) # True: black, False: grey       
+    res=[]
+
+    def dfs(node):
+        """
+        Very good DFS to mark white,grey,black
+        """
+        if node in visited:
+            return visited[node]
+        visited[node]=False
+        for child in mp[node]:
+            status = dfs(child)
+            if status==False:
+                return False
+        visited[node]=True
+        # post order we add
+        res.append(node)
+        return True
+    
+    for key,val in mp.items():
+        if not dfs(key):
+            return ""
+    return "".join(res[::-1])
