@@ -1,3 +1,6 @@
+"""
+iterative inorder generally faster than recursive if westopping.
+"""
 ### binary search closest value ###
 # SC: O(h)
 # SC: O(1)
