@@ -113,3 +113,11 @@ print(getGeq(nums,5))
 https://leetcode.com/problems/find-in-mountain-array/
 https://leetcode.com/problems/longest-mountain-in-array/
 """
+
+
+##### More advanced notes #####
+"""
+if we are not returning something in the array, usually we do while l<r:
+    watch below for explanation
+    https://www.youtube.com/watch?v=3JU0v2kuYGg&ab_channel=CrackingFAANG
+"""
