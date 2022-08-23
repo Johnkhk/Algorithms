@@ -90,8 +90,8 @@ def getLeq(nums,target):
     if r==-1:
         return -1
     return nums[r]
-# nums=[1,3,5,11]
-# print(getLeq(nums,1.1))
+nums=[1,3,5,11]
+print(getLeq(nums,1.1))
 
 def getGeq(nums,target):
     l,r = 0, len(nums)-1
@@ -106,8 +106,8 @@ def getGeq(nums,target):
     if l==len(nums):
         return -1
     return nums[l]
-nums=[1,3,5,11]
-print(getGeq(nums,5))
+# nums=[1,3,5,11]
+# print(getGeq(nums,5))
 # TODO:
 """
 https://leetcode.com/problems/find-in-mountain-array/
@@ -120,4 +120,24 @@ https://leetcode.com/problems/longest-mountain-in-array/
 if we are not returning something in the array, usually we do while l<r:
     watch below for explanation
     https://www.youtube.com/watch?v=3JU0v2kuYGg&ab_channel=CrackingFAANG
+
+To, fit a condition, use while l<r:
+222. Count Complete Tree Nodes
+while l<=r:
+    # mid = (l+r)//2
+    mid = l+(r-l)//2
+
+    if exists(root,d,mid):
+        l=mid+1
+    else:
+        r=mid-1
+return l
+First Bad Version
+while l<=r:
+    mid = (l+r)//2
+    if not isBadVersion(mid):
+        l=mid+1
+    else:
+        r=mid-1
+return l
 """
