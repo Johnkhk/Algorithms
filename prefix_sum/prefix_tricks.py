@@ -26,4 +26,67 @@ print(res)
     
 
 
+######## 1712 ways to split 3 array ##########
+### binary search and prefixsum
 
+def waysToSplit(self, nums: List[int]) -> int:
+    
+    N = len(nums)
+    
+    prefix=[0]
+    for i in range(N):
+        prefix.append(prefix[-1]+nums[i])
+    total=prefix[N]
+    ans=0
+    for i in range(1,N-1):
+        lsum = prefix[i]
+        
+        l,r=i+1,N+1
+        while l<r:
+            mid = (l+r)//2
+            # msum = prefix[mid] - lsum
+            # if msum>=lsum:
+            if prefix[mid]>=lsum*2:
+                r=mid
+            else:
+                l=mid+1
+        L = l
+        l,r=i+1,N+1
+        while l<r:
+            mid = (l+r)//2
+            # msum = prefix[mid] - prefix[i]
+            # rsum = total - prefix[mid]
+            # if not (rsum>=msum):
+            if not (total-prefix[mid]>=prefix[mid]-lsum):
+            
+                r=mid
+            else:
+                l=mid+1
+        R=l
+        
+        # print(L,R)
+        # ans+= max(0,(R-L)-1)
+        # ans+= (R-L-1)
+        
+        # ans += max(0, min(len(nums), R) - max(i+1, L))
+        if L<i+1:
+            L=i+1
+        if R>=len(nums):
+            R=len(nums)
+        if L>R:
+            continue
+        ans+=R-L
+
+        
+    return ans%((10**9)+7)
+
+
+############################ prefix_sum of matrix ############################
+mat = [[1,1,3,2,4,3,2],[1,1,3,2,4,3,2],[1,1,3,2,4,3,2]]
+
+m,n=len(mat),len(mat[0])
+prefixSum = [[0]*(n+1) for i in range(m+1)]
+for i in range(1,m+1):
+    for j in range(1,n+1):
+        prefixSum[i][j] = prefixSum[i-1][j] + prefixSum[i][j-1] - prefixSum[i-1][j-1] + mat[i-1][j-1]
+print(prefixSum)
