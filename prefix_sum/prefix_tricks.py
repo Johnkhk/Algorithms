@@ -83,10 +83,58 @@ def waysToSplit(self, nums: List[int]) -> int:
 
 ############################ prefix_sum of matrix ############################
 mat = [[1,1,3,2,4,3,2],[1,1,3,2,4,3,2],[1,1,3,2,4,3,2]]
-
+"""
+prefix[i][j] = sum(matrix[0...i][0...j]) not including i and j
+"""
 m,n=len(mat),len(mat[0])
 prefixSum = [[0]*(n+1) for i in range(m+1)]
 for i in range(1,m+1):
     for j in range(1,n+1):
         prefixSum[i][j] = prefixSum[i-1][j] + prefixSum[i][j-1] - prefixSum[i-1][j-1] + mat[i-1][j-1]
 print(prefixSum)
+
+### Sum any region ###
+def sumRegion(self, row1: int, col1: int, row2: int, col2: int) -> int:
+    row1+=1
+    col1+=1
+    row2+=1
+    col2+=1
+    sm=0
+    whole = self.prefixSum[row2][col2]
+    left = self.prefixSum[row2][col1-1]
+    top = self.prefixSum[row1-1][col2]
+    topleft = self.prefixSum[row1-1][col1-1]
+    return whole - left - top + topleft
+
+### ###
+def maxSideLength(mat, threshold):
+        
+    m,n=len(mat),len(mat[0])
+    prefixSum = [[0]*(n+1) for i in range(m+1)]
+    for i in range(1,m+1):
+        for j in range(1,n+1):
+            prefixSum[i][j] = prefixSum[i-1][j] + prefixSum[i][j-1] - prefixSum[i-1][j-1] + mat[i-1][j-1]
+    
+    def sumRegion(row1: int, col1: int, row2: int, col2: int) -> int:
+        if row2>=len(prefixSum) or col2>=len(prefixSum[0]):
+            return float("inf")
+        whole = prefixSum[row2][col2]
+        left = prefixSum[row2][col1-1]
+        top = prefixSum[row1-1][col2]
+        topleft = prefixSum[row1-1][col1-1]
+        return whole - left - top + topleft
+    
+    # i=2
+    # j=1
+    # sqr_len=1
+    # print(sumRegion(i,j,i+sqr_len,j+sqr_len))
+    
+    mx = 0
+    for i in range(1,len(mat)+1):
+        for j in range(1,len(mat[0])+1):
+            # sqr_len=0
+            sqr_len=mx
+            while sumRegion(i,j,i+sqr_len,j+sqr_len)<=threshold:
+                sqr_len+=1
+                mx = max(sqr_len,mx)
+    return mx
