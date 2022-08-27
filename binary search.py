@@ -94,6 +94,9 @@ def getLeq(nums,target):
 # print(getLeq(nums,1.1))
 # nums=[1,3,5,8,8,8,8,8,8,8,8,8,8,8,11]
 # print(getLeq(nums,8))
+    # return nums[r]
+# nums=[1,3,5,11]
+# print(getLeq(nums,1.1))
 
 ### get first bigger or equal to elem ###
 def getGeq(nums,target):
@@ -114,6 +117,8 @@ def getGeq(nums,target):
 # nums=[1,3,5,8,8,8,8,8,8,8,8,8,8,8,11]
 # print(getGeq(nums,8))
 
+# nums=[1,3,5,11]
+# print(getGeq(nums,5))
 # TODO:
 """
 https://leetcode.com/problems/find-in-mountain-array/
@@ -311,3 +316,4 @@ def maximizeSweetness(sweetness,k):
             l=mid+1
     return l-1
             
+
