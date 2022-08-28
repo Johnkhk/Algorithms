@@ -40,6 +40,27 @@ def lengthOfLIS(nums):
                     sub[j]=nums[i]
                     break
     return len(sub)
+    
+### binary search ###
+def lengthOfLIS(nums):
+    sub = [nums[0]]
+    for i in range(1,len(nums)):
+        if nums[i]>sub[-1]:
+            sub.append(nums[i])
+        else:
+            l,r=0,len(sub)-1
+            while l<r:
+                mid = l+(r-l)//2
+                if sub[mid]>=nums[i]:
+                    r=mid
+                else:
+                    l=mid+1
+            sub[l]=nums[i]
+            # for j in range(len(sub)):
+            #     if sub[j]>=nums[i]:
+            #         sub[j]=nums[i]
+            #         break
+    return len(sub)
 
 
         

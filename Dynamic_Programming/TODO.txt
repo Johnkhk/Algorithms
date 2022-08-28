@@ -1,0 +1,5 @@
+Explore card
+https://leetcode.com/explore/learn/card/recursion-ii/472/backtracking/2793/
+
+Patterns:
+https://leetcode.com/discuss/general-discussion/458695/dynamic-programming-patterns
