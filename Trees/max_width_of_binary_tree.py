@@ -1,6 +1,10 @@
 """
 very good question
 width is defined as the length between 2 end nodes, where if in between are Null are still counter
+algorith:
+    do a level order traversal with index of node
+    at a new level, record the index of first popped
+    and at other nodes in same level maximize the window size
 """
 
 ### Level Order Traversal ###

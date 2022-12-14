@@ -1,4 +1,7 @@
 """
+inorder traversal of BST is not unique
+"""
+"""
 iterative inorder generally faster than recursive if westopping.
 """
 ### binary search closest value ###
