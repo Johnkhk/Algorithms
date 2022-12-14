@@ -4,7 +4,7 @@ wordsearch 2 is very hard... the backtracking is not too bad but the optimizatio
 """
 ################## Quick and Dirty Implementation ##################
 # insert them into trie
-words=["hey"]
+# words=["hey"]
 WORD_KEY = '$'
 trie = {}
 for word in words:

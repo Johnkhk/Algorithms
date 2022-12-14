@@ -1,0 +1,10 @@
+https://leetcode.com/discuss/general-discussion/458695/dynamic-programming-patterns
+Patterns:
+    Minimum (Maximum) Path to Reach a Target
+    Distinct Ways
+    Merging Intervals
+    DP on Strings
+    Decision Making
+
+    
+https://leetcode.com/discuss/study-guide/1971008/how-to-convert-top-down-to-bottom-up-in-dp-problem

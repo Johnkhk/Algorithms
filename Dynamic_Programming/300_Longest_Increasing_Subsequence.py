@@ -1,5 +1,5 @@
+# LAST STONES has this pattern too
 # Top down memo
-
 def lengthOfLIS(nums):
     def dfs(i):
         if i in memo:

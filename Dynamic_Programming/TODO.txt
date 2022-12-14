@@ -1,5 +1,29 @@
+Edit Distance
+
+
 Explore card
 https://leetcode.com/explore/learn/card/recursion-ii/472/backtracking/2793/
 
-Patterns:
+DP Patterns:
 https://leetcode.com/discuss/general-discussion/458695/dynamic-programming-patterns
+
+Check this guy's description
+https://www.youtube.com/watch?v=DrRuCsxb6CI
+
+0/1 knapsack
+https://www.geeksforgeeks.org/0-1-knapsack-problem-dp-10/
+
+unbounded knapsack
+https://www.youtube.com/watch?v=OgvOZ6OrJoY
+
+digit DP
+https://www.geeksforgeeks.org/digit-dp-introduction/?ref=lbp
+
+djikstra
+https://www.youtube.com/watch?v=jbhuqIASjoM
+
+bellman ford
+https://www.youtube.com/watch?v=75yC1vbS8S8
+
+distinct subseq
+https://www.youtube.com/watch?v=nVG7eTiD2bY

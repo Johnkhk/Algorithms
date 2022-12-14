@@ -1,0 +1,50 @@
+overlap criterion
+
+The only way to not overlap is if 
+
+a: a0 |----| a1
+b:              b0 |----| b1
+OR
+a:              a0 |----| a1
+b: b0 |----| b1
+
+if b0>a1 or a0>b1 Then No overlap
+so negate that
+b0<a1 and a0<b1 Then Overlap
+
+
+if max(s,start) < min(e,end):
+    return False
+if s < end and start < e:
+    return False
+
+case 1: b ends before a ends:
+a: a0 |-------------| a1
+b:     b0 |-----| b1
+
+case 2: b ends after a ends:
+a: a0 |--------| a1
+b:     b0 |--------| b1
+
+case 3: b starts after a ends: (negative overlap)
+a: a0 |----| a1
+b:              b0 |----| b1
+
+
+
+435. Non-overlapping Intervals
+57. Insert Interval
+252 meeting rooms
+128. Longest Consecutive Sequence
+163 Missing Ranges
+228. Summary Ranges
+352. Data Stream as Disjoint Intervals
+1854 LINESWEEP
+729. My Calendar I
+731. My Calendar II
+732. My Calendar III (hard)
+57. Insert Interval 
+https://leetcode.com/contest/weekly-contest-310/problems/divide-intervals-into-minimum-number-of-groups/
+
+LC weekly 2406.
+https://www.youtube.com/watch?v=A43uw6evNEM

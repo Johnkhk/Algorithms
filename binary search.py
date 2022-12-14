@@ -317,3 +317,7 @@ def maximizeSweetness(sweetness,k):
     return l-1
             
 
+# b=[1,2,3,4,5,6]
+# # c = bisect.bisect_left(b,3) # 2
+# c = bisect.bisect_right(b,3) # 3
+# print("C",c)
