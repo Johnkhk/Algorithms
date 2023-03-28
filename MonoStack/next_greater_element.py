@@ -138,3 +138,5 @@ print(a)
 
         
 #nge3
+
+#nge4 https://leetcode.com/problems/next-greater-element-iv/
