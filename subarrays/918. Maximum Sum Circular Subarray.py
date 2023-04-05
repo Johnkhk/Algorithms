@@ -5,6 +5,8 @@ We make a array called right_max which stores the max subarr sum starting and in
 then while we do kadane, we can find special kadane too by getting the prefix + right_max[i+1] (prefix includes current i)
 we do special = max(special, prefix + right_max[i+1])
 we dont worry about maxing prefix because the special max thing takes care of that since right_max[i] >= right_max[i+1] so if we dont do anything it (left side of max), it means prefix was badly taken
+T: O(N)
+S: O(N)
 """
 
 class Solution:
@@ -39,5 +41,35 @@ class Solution:
         print(right_max)
         return max(mx,special)
     
-            
+"""
+better solution:
+find the minsubarray sum and take max(sum - minsubarray, maxsubarray)
+if minsubarray == sum, return maxsubarray
+"""            
         
+class Solution:
+    def maxSubarraySumCircular(self, nums: List[int]) -> int:
+        n = len(nums)
+        
+        curmx = 0
+        curmi = 0
+        
+        mx = float("-inf")
+        mi = float("inf")
+        
+        for i in range(n):
+            if curmx + nums[i] < nums[i]:
+                curmx = nums[i]
+            else:
+                curmx += nums[i]
+            if curmi + nums[i] > nums[i]:
+                curmi = nums[i]
+            else:
+                curmi += nums[i]
+                
+            mx = max(mx, curmx)
+            mi = min(mi, curmi)
+        sm = sum(nums)
+        if mi == sm:
+            return mx
+        return max(mx,sm-mi)
