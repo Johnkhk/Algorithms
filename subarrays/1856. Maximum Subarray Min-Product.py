@@ -10,7 +10,11 @@
 #             print("aa",i,j)
 #             print(subarr, sum(subarr))
 
-
+"""
+use a monostack. we know the ple and nle when we pop
+then we just use a prefix sum array to find the prodsum
+use n+1 for emptying the stack trick
+"""
 
 class Solution:
     def maxSumMinProduct(self, nums: List[int]) -> int:
