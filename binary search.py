@@ -1,35 +1,38 @@
 ### Most basic form (Takes care of edge cases when it only has 1 number) ###
-def binarySearch(nums,target):
-    l,r = 0,len(nums)-1
-    while l<=r:
-        mid = (l+r)//2
-        if nums[mid]==target:
+def binarySearch(nums, target):
+    l, r = 0, len(nums) - 1
+    while l <= r:
+        mid = (l + r) // 2
+        if nums[mid] == target:
             return mid
-        elif nums[mid]<target:
-            l=mid+1
+        elif nums[mid] < target:
+            l = mid + 1
         else:
-            r=mid-1
+            r = mid - 1
     return -1
 
+
 ### If the element can still be in mid (previous elemnt to mid) ###
-def binarySearch(matrix,target):
-    l,r = 0,len(matrix)-1
-            
-    while l<r:
-        mid = (l+r)//2
-        if matrix[mid][-1]==target:
+def binarySearch(matrix, target):
+    l, r = 0, len(matrix) - 1
+
+    while l < r:
+        mid = (l + r) // 2
+        if matrix[mid][-1] == target:
             return True
-        elif matrix[mid][-1]<target:
-            l=mid+1
+        elif matrix[mid][-1] < target:
+            l = mid + 1
         else:
-            r=mid
+            r = mid
     return l
+
+
 ### Finding Pivot IDX in rotated sorted arr ###
 # Actually there's only 2 cases: (find pivot (smallest element))
 ## USING RIGHT
 # case1: [4,5,6,7,0*,1,2] mid>r: that means pivot>mid (search right: l=mid+1)
 # case2: [7,0*,1,2,3,4,5] mid<=r: that means pivot<=mid, equals for when middle is 0
-#Alternatively
+# Alternatively
 ## USING LEFT
 # case1: [4,5,6,7,0*,1,2] l<=mid: that means pivot>mid (search right: l=mid+1)
 # case1.5: if nums[l]<nums[r]:break (1,2,3,4,5)
@@ -38,80 +41,89 @@ def findPivot(nums):
     """
     using left
     """
-    l,r = 0, len(nums)-1
-    while l<r:
-        mid = (l+r)//2
-        if nums[l]<=nums[mid]:
-            if nums[l]<nums[r]:
+    l, r = 0, len(nums) - 1
+    while l < r:
+        mid = (l + r) // 2
+        if nums[l] <= nums[mid]:
+            if nums[l] < nums[r]:
                 break
-            l=mid+1 # case1
-        elif nums[l]>nums[mid]: # case2
-            r=mid
-    pivot=l
+            l = mid + 1  # case1
+        elif nums[l] > nums[mid]:  # case2
+            r = mid
+    pivot = l
     return pivot
+
+
 def findPivot(nums):
     """
     using right
     """
-    l,r = 0, len(nums)-1
-    while l<r:
-        mid = (l+r)//2
-        if nums[r]<nums[mid]:
-            l=mid+1 # case1
-        elif nums[r]>=nums[mid]: # case2
-            r=mid
-    pivot=l
+    l, r = 0, len(nums) - 1
+    while l < r:
+        mid = (l + r) // 2
+        if nums[r] < nums[mid]:
+            l = mid + 1  # case1
+        elif nums[r] >= nums[mid]:  # case2
+            r = mid
+    pivot = l
     return pivot
+
 
 ### peak in mountain ###
 def findPeak(arr):
     lo = 0
-    hi = len(arr)-1
+    hi = len(arr) - 1
 
-    while(lo<hi):
+    while lo < hi:
         # mid = lo + (hi-lo +1)/2
-        mid = (lo + hi)/2
-        if(arr[mid]<arr[mid+1]):
-            lo=mid+1
+        mid = (lo + hi) / 2
+        if arr[mid] < arr[mid + 1]:
+            lo = mid + 1
         else:
-            hi=mid
+            hi = mid
     return lo
 
-### get first smaller or equal elem ### 
-def getLeq(nums,target):
-    l,r = 0, len(nums)-1
-    while l<=r:
-        mid = (l+r)//2
-        if nums[mid]<=target: # if nums[mid]<target: (FIRST ELEM STRICTLY SMALLER)
-            l=mid+1
+
+### get first smaller or equal elem ###
+def getLeq(nums, target):
+    l, r = 0, len(nums) - 1
+    while l <= r:
+        mid = (l + r) // 2
+        if nums[mid] <= target:  # if nums[mid]<target: (FIRST ELEM STRICTLY SMALLER)
+            l = mid + 1
         else:
-            r=mid-1
+            r = mid - 1
     # not found
-    if r==-1:
+    if r == -1:
         return -1
     return r
+
+
 # nums=[1,3,5,11]
 # print(getLeq(nums,1.1))
 # nums=[1,3,5,8,8,8,8,8,8,8,8,8,8,8,11]
 # print(getLeq(nums,8))
-    # return nums[r]
+# return nums[r]
 # nums=[1,3,5,11]
 # print(getLeq(nums,1.1))
 
+
 ### get first bigger or equal to elem ###
-def getGeq(nums,target):
-    l,r = 0, len(nums)-1
-    while l<=r:
-        mid = (l+r)//2
+def getGeq(nums, target):
+    l, r = 0, len(nums) - 1
+    while l <= r:
+        mid = (l + r) // 2
         # GEQ
-        if nums[mid]<target: # if nums[mid]<=target: (FIRST ELEM STRICTLY GREATER)
-            l=mid+1
+        if nums[mid] < target:  # if nums[mid]<=target: (FIRST ELEM STRICTLY GREATER)
+            l = mid + 1
         else:
-            r=mid-1
+            r = mid - 1
     # not found
-    if l==len(nums):
+    if l == len(nums):
         return -1
     return l
+
+
 # nums=[1,3,5,11]
 # print(getGeq(nums,5))
 # nums=[1,3,5,8,8,8,8,8,8,8,8,8,8,8,11]
@@ -130,18 +142,19 @@ def find_first_pos(arr, target):
     left = 0
     right = len(arr) - 1
 
-    first_position = -1     # keep track of the latest valid mid position
+    first_position = -1  # keep track of the latest valid mid position
     while left <= right:
         mid = left + (right - left) // 2
         if arr[mid] == target:
             first_position = mid
-            right = mid - 1     # continue searching to the left
+            right = mid - 1  # continue searching to the left
         elif arr[mid] < target:
             left = mid + 1
         else:
             right = mid - 1
 
     return first_position
+
 
 ##### More advanced notes #####
 """
@@ -179,7 +192,6 @@ Correctly initialize the boundary variables left and right to specify search spa
 Decide return value. Is it return left or return left - 1? Remember this: after exiting the while loop, left is the minimal k​ satisfying the condition function;
 Design the condition function. This is the most difficult and most beautiful part. Needs lots of practice.
 """
-
 ############################ E.G using template ############################
 
 ### sqrt(x) ###
@@ -189,133 +201,147 @@ algo:
         use template, condition is first number stuch that the sqrt is strictly greater, then we return that -1. 
         We need to increase r by 1 for edge cases. 
 """
+
+
 def sqrt(x):
-    l,r = 0,x+1
-    while l<r:
-        m = (l+r)//2
-        
-        if m*m>x:
-            r=m
+    l, r = 0, x + 1
+    while l < r:
+        m = (l + r) // 2
+
+        if m * m > x:
+            r = m
         else:
-            l=m+1
-    return l-1
+            l = m + 1
+    return l - 1
+
 
 ### 34.Find First and Last Position of Element in Sorted Array ###
 
+
 def searchRange(nums, target):
-    l,r = 0,len(nums)-1
-    while l<r:
-        mid = (l+r)//2
-        if nums[mid] >= target: # minimize this condition while true
-            r=mid
+    l, r = 0, len(nums) - 1
+    while l < r:
+        mid = (l + r) // 2
+        if nums[mid] >= target:  # minimize this condition while true
+            r = mid
         else:
-            l=mid+1
-    start=l
-    
-    l,r = 0,len(nums)-1
-    while l<r:
-        mid = (l+r)//2
-        if nums[mid]>target: # minimize this condition while true
-            r=mid
+            l = mid + 1
+    start = l
+
+    l, r = 0, len(nums) - 1
+    while l < r:
+        mid = (l + r) // 2
+        if nums[mid] > target:  # minimize this condition while true
+            r = mid
         else:
-            l=mid+1
-    end = l-1
-    
+            l = mid + 1
+    end = l - 1
+
     if start == -1:
-        return [-1,-1]
-    
-    return [start,end]
+        return [-1, -1]
+
+    return [start, end]
+
 
 ### 852. Peak Index in a Mountain Array ### (Holy Crap this method is good)
 def peakIndexInMountainArray(arr):
-    l,r = 0,len(arr)-1
-    while l<r:
-        mid = (l+r)//2
-        if mid+1<len(arr) and arr[mid]>arr[mid+1]: # first condition for this to be true
-            r=mid
+    l, r = 0, len(arr) - 1
+    while l < r:
+        mid = (l + r) // 2
+        if (
+            mid + 1 < len(arr) and arr[mid] > arr[mid + 1]
+        ):  # first condition for this to be true
+            r = mid
         else:
-            l=mid+1
+            l = mid + 1
     return l
+
 
 ### 162. Find Peak Element ### (Use method again, but this one is WEIRD, why is this the condition)
 def findPeakElement(nums):
-        l,r = 0, len(nums)-1
-        while l<r:
-            mid = (l+r)//2
-            if nums[mid]>nums[mid+1]:
-                r=mid
-            else:
-                l=mid+1
-        return l
+    l, r = 0, len(nums) - 1
+    while l < r:
+        mid = (l + r) // 2
+        if nums[mid] > nums[mid + 1]:
+            r = mid
+        else:
+            l = mid + 1
+    return l
+
 
 ### 1095. Find in Mountain Array ### (EZ, apply same template, wow 1 try)
-def findInMountainArray(target,mountain_arr):
-    l,r = 0,mountain_arr.length()-1
-    while l<r:
-        mid = (l+r)//2
-        if mid+1<mountain_arr.length() and mountain_arr.get(mid)>mountain_arr.get(mid+1):
-            r=mid
+def findInMountainArray(target, mountain_arr):
+    l, r = 0, mountain_arr.length() - 1
+    while l < r:
+        mid = (l + r) // 2
+        if mid + 1 < mountain_arr.length() and mountain_arr.get(mid) > mountain_arr.get(
+            mid + 1
+        ):
+            r = mid
         else:
-            l=mid+1
+            l = mid + 1
     peak = l
 
     print(peak)
 
-    l,r = 0,peak
-    while l<r:
-        mid = (l+r)//2
-        if mountain_arr.get(mid)>=target:
-            r=mid
+    l, r = 0, peak
+    while l < r:
+        mid = (l + r) // 2
+        if mountain_arr.get(mid) >= target:
+            r = mid
         else:
-            l=mid+1
-    leftans=l
-    l,r = peak+1,mountain_arr.length()-1
-    while l<r:
-        mid = (l+r)//2
-        if mountain_arr.get(mid)<=target:
-            r=mid
+            l = mid + 1
+    leftans = l
+    l, r = peak + 1, mountain_arr.length() - 1
+    while l < r:
+        mid = (l + r) // 2
+        if mountain_arr.get(mid) <= target:
+            r = mid
         else:
-            l=mid+1
-    rightans=l
-    if mountain_arr.get(leftans)==target:
+            l = mid + 1
+    rightans = l
+    if mountain_arr.get(leftans) == target:
         return leftans
-    if mountain_arr.get(rightans)==target:
+    if mountain_arr.get(rightans) == target:
         return rightans
     return -1
+
+
 ### 1231. Divide Chocolate ### (template still works)
-def maximizeSweetness(sweetness,k):
+def maximizeSweetness(sweetness, k):
     """
     Idea & algo:
     using the same binary search template...
     1. min and max are min(sweetness), max(sweetness)+1 (+1 for edge case)
-    2. condition: 
+    2. condition:
         -   If we have more chunks than amount of people,
-            we should increase our limit. 
+            we should increase our limit.
         -   If we less chunks than amount of people,
             then we should decrease our limit. (chunks<people)
     3. return l or r
     """
+
     def cond(limit):
-        cursweet=0
-        chunks=0
+        cursweet = 0
+        chunks = 0
         for j in sweetness:
-            cursweet+=j
-            if cursweet>=limit:
-                cursweet=0
-                chunks+=1
+            cursweet += j
+            if cursweet >= limit:
+                cursweet = 0
+                chunks += 1
         # higher sweetness to lower sweetness, this is true, we find the first
-        return chunks<num_people
-    
-    l,r = min(sweetness),sum(sweetness)+1
-    num_people = k+1
-    while l<r:
-        mid = l+(r-l)//2
+        return chunks < num_people
+
+    l, r = min(sweetness), sum(sweetness) + 1
+    num_people = k + 1
+    while l < r:
+        mid = l + (r - l) // 2
         if cond(mid):
-            r=mid
+            r = mid
         else:
-            l=mid+1
-    return l-1
-            
+            l = mid + 1
+    return l - 1
+
 
 # b=[1,2,3,4,5,6]
 # # c = bisect.bisect_left(b,3) # 2
